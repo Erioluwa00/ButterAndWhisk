@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fresh Smoothies — scroll demo</title>
+<style>
+  :root{
+    --ink: #2b2115;
+  }
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; font-family: 'Helvetica Neue', Arial, sans-serif; color:#fff; background:#fff9ef; }
+
+  /* ===== Sticky hero ===== */
+  .hero{
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display:flex;
+    align-items:center;
+    transition: background 0.9s ease;
+    background: #F5C84A;
+    z-index: 1;
+  }
+  .hero-inner{
+    width:100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    padding: 0 6vw;
+    position: relative;
+    height:100%;
+  }
+
+  .nav{
+    position:absolute; top:0; left:0; right:0;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 28px 6vw;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+  }
+  .nav .brand{ display:flex; align-items:center; gap:8px; font-weight:700; }
+  .nav .brand .dot{ width:22px;height:22px;border-radius:50%; background:#fff; display:inline-block; }
+  .nav ul{ list-style:none; display:flex; gap:28px; margin:0; padding:0; opacity:0.9; }
+
+  .copy{ max-width: 380px; z-index:2; }
+  .eyebrow{ font-size:12px; letter-spacing:0.12em; text-transform:uppercase; opacity:0.75; margin:0 0 14px; font-weight:600; }
+  h1.title{
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 0.98;
+    margin: 0 0 18px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .title .accent{ position:relative; }
+  .desc{ font-size:14px; line-height:1.7; opacity:0.85; max-width:300px; margin:0 0 26px; }
+  .cta{
+    display:inline-flex; align-items:center; gap:10px;
+    background:#fff; color: var(--ink); border:none;
+    padding: 13px 22px; border-radius: 40px; font-size:13px; font-weight:700;
+    cursor:pointer;
+  }
+  .play{
+    width:44px;height:44px;border-radius:50%;
+    background: rgba(255,255,255,0.35);
+    display:flex;align-items:center;justify-content:center;
+    margin-top: 30px; cursor:pointer;
+  }
+  .play::after{
+    content:''; width:0; height:0;
+    border-top:8px solid transparent; border-bottom:8px solid transparent;
+    border-left:13px solid #fff; margin-left:3px;
+  }
+
+  .flavor-icons{ display:flex; gap:12px; margin-top:34px; }
+  .flavor-icons span{
+    width:46px;height:46px;border-radius:50%;
+    background: rgba(255,255,255,0.4);
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;
+  }
+
+  /* ===== Bowl visual ===== */
+  .bowl-wrap{
+    position:relative; width:min(46vw, 480px); height:min(46vw,480px);
+    z-index:2;
+  }
+  .bowl{
+    position:absolute; inset:0; border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, #fffdf7, #f4ede0 70%);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.18);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .bowl-fill{
+    position:absolute; inset: 8%;
+    border-radius:50%;
+    display:grid; place-items:center;
+    font-size: 15vw;
+    line-height:1;
+    transition: background 0.9s ease;
+  }
+  .floaters{ position:absolute; inset:0; pointer-events:none; }
+  .floaters span{
+    position:absolute; font-size: 34px;
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.15));
+  }
+
+  .blob{
+    position:absolute; inset:0;
+    opacity:0.5;
+    transition: opacity 0.9s ease;
+  }
+
+  /* ===== Scroll sections that trigger the swap ===== */
+  .trigger{ height: 100vh; }
+
+  .marker{
+    position:absolute; bottom: 24px; left:50%; transform:translateX(-50%);
+    display:flex; gap:8px; z-index:3;
+  }
+  .marker i{ width:8px;height:8px;border-radius:50%; background:rgba(255,255,255,0.4); }
+  .marker i.active{ background:#fff; width:22px; border-radius:5px; transition: all 0.3s ease; }
+
+  .note{
+    max-width:640px; margin: 60px auto 100px; padding: 0 24px;
+    font-size:14px; line-height:1.7; color:#5b4a33; text-align:center;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .hero, .bowl-fill, .blob{ transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero" id="hero">
+  <div class="nav">
+    <div class="brand"><span class="dot"></span> Fresh Smoothies</div>
+    <ul><li>Products</li><li>About</li><li>Contact</li></ul>
+  </div>
+
+  <div class="hero-inner">
+    <div class="copy">
+      <p class="eyebrow" id="eyebrow">fresh & seasonal</p>
+      <h1 class="title" id="title">Smoothies<br/>Banane</h1>
+      <p class="desc" id="desc">Blended fresh every morning with real fruit, no syrups, no shortcuts.</p>
+      <button class="cta">Order now <span>&rarr;</span></button>
+      <div class="flavor-icons">
+        <span>🍌</span><span>🥭</span><span>🥥</span><span>🍈</span>
+      </div>
+    </div>
+
+    <div class="bowl-wrap">
+      <div class="bowl">
+        <div class="bowl-fill" id="bowlFill">🍌</div>
+      </div>
+      <div class="floaters" id="floaters">
+        <span style="top:6%; left:70%;">🥭</span>
+        <span style="top:60%; left:4%;">🍌</span>
+        <span style="top:80%; left:60%;">🥥</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="marker">
+    <i class="active" data-i="0"></i><i data-i="1"></i>
+  </div>
+</section>
+
+<div class="trigger" data-flavor="0"></div>
+<div class="trigger" data-flavor="1"></div>
+
+<p class="note">Scroll up and down over this page — the hero stays pinned to the screen while the color, headline,
+copy, bowl contents, and floating fruit all swap together as each section below scrolls past.
+That's the whole trick: one fixed hero, driven by scroll position.</p>
+
+<script>
+  const flavors = [
+    {
+      bg: '#F5C84A',
+      fill: 'linear-gradient(160deg, #FFE9A8, #F2B23A)',
+      eyebrow: 'fresh & seasonal',
+      title: 'Smoothies<br/>Banane',
+      desc: 'Blended fresh every morning with real fruit, no syrups, no shortcuts.',
+      emoji: '🍌',
+      floaters: ['🥭','🍌','🥥']
+    },
+    {
+      bg: '#E8623C',
+      fill: 'linear-gradient(160deg, #FFB199, #D8462A)',
+      eyebrow: 'berry season',
+      title: 'Smoothies<br/>Fraise',
+      desc: 'Strawberries, kiwi and a handful of berries, blended cold and fast.',
+      emoji: '🍓',
+      floaters: ['🍓','🥝','🫐']
+    }
+  ];
+
+  const hero = document.getElementById('hero');
+  const title = document.getElementById('title');
+  const desc = document.getElementById('desc');
+  const eyebrow = document.getElementById('eyebrow');
+  const bowlFill = document.getElementById('bowlFill');
+  const floaters = document.getElementById('floaters');
+  const markers = document.querySelectorAll('.marker i');
+
+  function applyFlavor(i){
+    const f = flavors[i];
+    hero.style.background = f.bg;
+    title.innerHTML = f.title;
+    desc.textContent = f.desc;
+    eyebrow.textContent = f.eyebrow;
+    bowlFill.style.background = f.fill;
+    bowlFill.textContent = f.emoji;
+    const spans = floaters.querySelectorAll('span');
+    spans.forEach((s, idx) => s.textContent = f.floaters[idx] || '');
+    markers.forEach(m => m.classList.toggle('active', m.dataset.i == i));
+  }
+
+  const triggers = document.querySelectorAll('.trigger');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        applyFlavor(Number(entry.target.dataset.flavor));
+      }
+    });
+  }, { threshold: 0.5 });
+  triggers.forEach(t => observer.observe(t));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,415 @@
+/* ===== Home Page Styles ===== */
+
+/* Luxury Hero Section */
+.hero-section {
+  position: relative;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--color-ivory);
+  text-align: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(250,247,242,0.2) 0%, var(--color-ivory) 80%);
+  z-index: 2;
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: 0 var(--space-md);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-terracotta);
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--color-cocoa);
+  margin-bottom: var(--space-md);
+}
+
+.hero-title span {
+  font-style: italic;
+  font-weight: 300;
+}
+
+.hero-desc {
+  font-size: var(--fs-lg);
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin-bottom: var(--space-xl);
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+/* ===== Sticky Storytelling Rooms ===== */
+.story-room-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  transition: var(--story-transition);
+  z-index: 10;
+}
+
+.story-room-inner {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  padding-top: var(--header-height);
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  align-items: center;
+  height: 100%;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .story-room-inner {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    padding-top: var(--space-xl);
+    gap: var(--space-md);
+  }
+}
+
+.story-room-copy {
+  max-width: 450px;
+  z-index: 5;
+}
+
+.story-room-eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  margin-bottom: var(--space-sm);
+}
+
+.story-room-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6.5vw, 5.5rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.15;
+  margin-bottom: var(--space-md);
+}
+
+.story-room-desc {
+  font-size: var(--fs-lg);
+  line-height: 1.8;
+  margin-bottom: var(--space-lg);
+}
+
+.story-room-visual-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 550px;
+  perspective: 1200px;
+}
+
+@keyframes float-slow {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.story-room-image-float {
+  animation: float-slow 8s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Story Scene Spin Transitions */
+@keyframes spin-in-even {
+  0% {
+    transform: rotate(-120deg) scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes spin-in-odd {
+  0% {
+    transform: rotate(120deg) scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+.anim-scene-0 {
+  animation: spin-in-even 2.5s cubic-bezier(0.16, 1, 0.25, 1) forwards;
+  transform-origin: center center;
+}
+
+.anim-scene-1 {
+  animation: spin-in-odd 2.5s cubic-bezier(0.16, 1, 0.25, 1) forwards;
+  transform-origin: center center;
+}
+
+.anim-scene-2 {
+  animation: spin-in-even 2.5s cubic-bezier(0.16, 1, 0.25, 1) forwards;
+  transform-origin: center center;
+}
+
+.anim-scene-3 {
+  animation: spin-in-odd 2.5s cubic-bezier(0.16, 1, 0.25, 1) forwards;
+  transform-origin: center center;
+}
+
+.anim-scene-4 {
+  animation: spin-in-even 2.5s cubic-bezier(0.16, 1, 0.25, 1) forwards;
+  transform-origin: center center;
+}
+
+
+.story-room-floaters {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.story-room-floaters span {
+  position: absolute;
+  font-size: var(--fs-3xl);
+  filter: drop-shadow(0 6px 12px rgba(78, 52, 46, 0.15));
+  transition: transform 0.6s ease;
+}
+
+/* Particle overlays and custom effects */
+.steam-emitter {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 100px;
+  z-index: 4;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.steam-cloud {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  filter: blur(10px);
+  animation: steamRise 3s ease-in infinite;
+  opacity: 0;
+}
+
+@keyframes steamRise {
+  0% { transform: translate(-50%, 0) scale(0.6); opacity: 0; }
+  10% { opacity: 0.5; }
+  50% { opacity: 0.3; }
+  100% { transform: translate(-50%, -100px) scale(2); opacity: 0; }
+}
+
+.cookie-crumb {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-cocoa);
+  border-radius: 50%;
+  animation: crumbFall 4s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes crumbFall {
+  0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(200px) rotate(360deg); opacity: 0; }
+}
+
+/* Indicators */
+.story-room-markers {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 20;
+}
+
+.story-room-markers span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(78, 52, 46, 0.25);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.story-room-markers span.active {
+  background-color: var(--color-cocoa);
+  width: 28px;
+  border-radius: 4px;
+}
+
+/* Trigger elements in page */
+.story-room-trigger {
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Editorial Sections */
+.freshly-baked-marquee {
+  background-color: var(--color-butter);
+  color: var(--color-cocoa);
+  padding: var(--space-md) 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Baking Process timeline */
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-xl);
+  margin-top: var(--space-xl);
+}
+
+.process-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  position: relative;
+}
+
+.process-card-step {
+  font-family: var(--font-display);
+  font-size: var(--fs-4xl);
+  color: var(--color-terracotta);
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+}
+
+/* Bakers section */
+.bakers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-xl);
+}
+
+.baker-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  text-align: center;
+  background-color: var(--bg-secondary);
+  padding: var(--space-xl) var(--space-md);
+  transition: var(--transition-medium);
+}
+
+.baker-card:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-terracotta);
+}
+
+.baker-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: var(--color-beige);
+  margin: 0 auto var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-5xl);
+  border: 2px solid var(--color-cocoa);
+  transition: var(--transition-medium);
+}
+
+.baker-card:hover .baker-avatar {
+  transform: rotate(10deg) scale(1.05);
+}
+
+/* Custom Cake ordering home section */
+.custom-cake-home {
+  background: linear-gradient(135deg, #321F1C 0%, #1D100E 100%);
+  color: var(--color-ivory);
+  padding: var(--space-3xl) var(--space-2xl);
+  position: relative;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(232, 215, 139, 0.15);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.custom-cake-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-2xl);
+  align-items: center;
+}
+
+.bespoke-arch-frame:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(232, 215, 139, 0.8) !important;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.55) !important;
+}
+
+@media (max-width: 768px) {
+  .custom-cake-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+/* Ensure room texts inherit correctly and are not overridden by global h2 / p rules */
+.story-room-container .story-room-eyebrow,
+.story-room-container .story-room-title,
+.story-room-container .story-room-desc {
+  color: inherit !important;
+}

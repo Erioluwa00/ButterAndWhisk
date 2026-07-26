@@ -1,0 +1,99 @@
+:root {
+  /* Color Palette - Option 3 (Editorial / Awwwards Style) */
+  --color-ivory: #FAF7F2;
+  --color-beige: #EFE2D3;
+  --color-cocoa: #4E342E;
+  --color-terracotta: #C96B4A;
+  --color-olive: #7C8A5A;
+  --color-butter: #E8D78B;
+
+  /* Theme mappings (Light theme defaults) */
+  --bg-primary: var(--color-ivory);
+  --bg-secondary: var(--color-beige);
+  --bg-dark: var(--color-cocoa);
+  --text-primary: var(--color-cocoa);
+  --text-secondary: #6e514a;
+  --text-light: var(--color-ivory);
+  --accent-color: var(--color-terracotta);
+  --success-color: var(--color-olive);
+  --warning-color: var(--color-butter);
+  --border-color: rgba(78, 52, 46, 0.15);
+  --border-focus: var(--color-terracotta);
+
+  /* Special Backgrounds for Scroll-Story Rooms */
+  --bg-scene-1: var(--color-ivory);
+  --bg-scene-2: #FFF0F2; /* Custom soft pink for Scene 2 (Cupcakes) */
+  --bg-scene-3: var(--color-butter); /* Butter Yellow for Scene 3 (Croissants) */
+  --bg-scene-4: var(--color-cocoa); /* Cocoa Brown for Scene 4 (Cookies) */
+  --bg-scene-5: #E2ECDE; /* Custom soft green/olive-tint for Scene 5 (Donuts) */
+  --bg-scene-6: #1a110f; /* Extra dark section for Scene 6 (Custom Cakes) */
+
+  /* Fonts */
+  --font-display: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Montserrat', Helvetica, Arial, sans-serif;
+
+  /* Typography Scale */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.25rem;
+  --fs-2xl: 1.5rem;
+  --fs-3xl: 2rem;
+  --fs-4xl: 2.75rem;
+  --fs-5xl: 3.5rem;
+  --fs-display: clamp(2.5rem, 6.5vw, 6rem);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(78, 52, 46, 0.05);
+  --shadow-md: 0 10px 30px rgba(78, 52, 46, 0.08);
+  --shadow-lg: 0 20px 40px rgba(78, 52, 46, 0.12);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+
+  /* Spacings */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 5rem;
+  --space-3xl: 8rem;
+
+  /* Grid/Layout */
+  --max-width: 1400px;
+  --header-height: 80px;
+
+  /* Borders & Radius */
+  --radius-sm: 4px;
+  --radius-md: 12px;
+  --radius-lg: 24px;
+  --radius-round: 50%;
+  --radius-pill: 100px;
+
+  /* Transitions */
+  --transition-fast: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-medium: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Sticky storytelling variables */
+  --story-transition: background 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Dark Mode Theme Overrides */
+[data-theme="dark"] {
+  --bg-primary: #1e1412;
+  --bg-secondary: #2c1d1a;
+  --bg-dark: #120b0a;
+  --text-primary: #f2ede9;
+  --text-secondary: #d1c4be;
+  --text-light: #1e1412;
+  --accent-color: #e58764;
+  --border-color: rgba(242, 237, 233, 0.12);
+  
+  --bg-scene-1: #1e1412;
+  --bg-scene-2: #2b181a;
+  --bg-scene-3: #423518;
+  --bg-scene-4: #150d0c;
+  --bg-scene-5: #1c2718;
+  --bg-scene-6: #0a0605;
+}

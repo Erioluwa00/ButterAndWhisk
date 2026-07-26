@@ -1,0 +1,116 @@
+/* ===== Checkout Page Styles ===== */
+
+.checkout-page {
+  padding: var(--space-xl) 0 var(--space-3xl);
+}
+
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.checkout-form-box {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.checkout-section-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+  margin-bottom: var(--space-sm);
+}
+
+.checkout-form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-sm);
+}
+
+.checkout-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.checkout-form-group label {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.checkout-input {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: var(--fs-sm);
+  transition: var(--transition-fast);
+}
+
+.checkout-input:focus {
+  border-color: var(--border-focus);
+  background-color: var(--bg-primary);
+}
+
+.checkout-shipping-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checkout-shipping-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  background-color: var(--bg-secondary);
+  transition: var(--transition-fast);
+}
+
+.checkout-shipping-card:hover,
+.checkout-shipping-card.active {
+  border-color: var(--color-cocoa);
+  background-color: var(--bg-primary);
+}
+
+.checkout-shipping-card-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.checkout-shipping-card-title {
+  font-weight: 600;
+  font-size: var(--fs-sm);
+}
+
+.checkout-shipping-card-desc {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+}
+
+.checkout-shipping-card-price {
+  font-weight: 700;
+}

@@ -1,0 +1,242 @@
+export const products = [
+  {
+    id: 'bday-1',
+    name: 'Le Grand Chocolat',
+    category: 'Birthday Cakes',
+    price: 85.00,
+    rating: 4.9,
+    badge: 'Best Seller',
+    availability: 'In Stock',
+    description: 'A decadent masterpiece of dark Belgian chocolate ganache, moist cocoa sponge layers, and gold leaf decorations.',
+    details: 'Rich chocolate buttercream, dark chocolate crumb coating, topped with fresh blackberries and real edible 24k gold leaf flakes. Ideal for milestone celebrations.',
+    ingredients: 'Belgian Dark Chocolate, Organic Flour, Free-range Eggs, Grass-fed Butter, Gold Leaf, Vanilla Extract, Blackberry Coulis.',
+    reviews: [
+      { author: 'Clara V.', rating: 5, comment: 'Absolutely breathtaking! The chocolate was rich but not overly sweet. The gold leaf made it feel so special.', date: 'July 15, 2026' },
+      { author: 'Marcus K.', rating: 5, comment: 'Brought this for my wife’s birthday. It was the absolute highlight of the night. Worth every single cent.', date: 'June 28, 2026' }
+    ],
+    color: '#3d251e',
+    visualType: 'layered-cake'
+  },
+  {
+    id: 'wedding-1',
+    name: 'La Rose Royale',
+    category: 'Wedding Cakes',
+    price: 320.00,
+    rating: 5.0,
+    badge: 'Luxury',
+    availability: 'Limited',
+    description: 'Three-tiered white chocolate and raspberry coulis wedding cake decorated with handcrafted buttercream roses.',
+    details: 'Each tier features alternating layers of light vanilla chiffon sponge and tangy fresh raspberry gelée, blanketed under a satin-smooth white chocolate velvet spray.',
+    ingredients: 'White Chocolate, Raspberries, Chiffon Sponge, Buttercream Roses, Bourbon Vanilla, Rosewater Essence.',
+    reviews: [
+      { author: 'Eleanor & Julian', rating: 5, comment: 'It was a piece of art at our wedding reception. Tasted like heaven and looked even better.', date: 'May 14, 2026' }
+    ],
+    color: '#faf0eb',
+    visualType: 'wedding-cake'
+  },
+  {
+    id: 'cupcake-1',
+    name: 'Blush Velvet Rose',
+    category: 'Cupcakes',
+    price: 6.50,
+    rating: 4.8,
+    badge: 'Seasonal',
+    availability: 'In Stock',
+    description: 'Delicate pink velvet cupcake topped with a whipped rosewater buttercream swirl and crystallized rose petals.',
+    details: 'Baked with organic beetroot extract for its natural blush hue, containing a molten white chocolate center that flows gently when bitten.',
+    ingredients: 'Beetroot juice extract, Rosewater, Cocoa powder, Mascarpone cheese, White chocolate core, Organic cane sugar.',
+    reviews: [
+      { author: 'Sophia H.', rating: 5, comment: 'So delicate and flowery. The molten center was a wonderful surprise!', date: 'July 20, 2026' }
+    ],
+    color: '#ffcdd2',
+    visualType: 'cupcake'
+  },
+  {
+    id: 'donut-1',
+    name: 'Gilded Pistachio Ring',
+    category: 'Donuts',
+    price: 7.00,
+    rating: 4.7,
+    badge: 'New',
+    availability: 'In Stock',
+    description: 'Yeast-risen brioche donut glazed with Sicilian pistachio paste and dusted with crushed pistachios and gold dust.',
+    details: 'A fluffy, buttery brioche base fermented for 24 hours, fried to a light crisp, coated in smooth green pistachio glaze, and finished with flakes of 24k gold.',
+    ingredients: 'Brioche Yeast Dough, Sicilian Pistachios, White Chocolate, Powdered Sugar, Edible Gold Dust.',
+    reviews: [],
+    color: '#aed581',
+    visualType: 'donut'
+  },
+  {
+    id: 'cookie-1',
+    name: 'Smoked Sea Salt Lava',
+    category: 'Cookies',
+    price: 5.50,
+    rating: 4.9,
+    badge: 'Best Seller',
+    availability: 'In Stock',
+    description: 'Thick, chewy chocolate chunk cookie with a molten fudge core, sprinkled with Maldon smoked sea salt flakes.',
+    details: 'Crisp caramel edges with a gooey, warm chocolate core. Baked with brown butter to yield an intensely nutty aroma.',
+    ingredients: 'Brown Butter, 70% Dark Chocolate Chunks, Dark Brown Sugar, Maldon Smoked Sea Salt, Madagascar Vanilla.',
+    reviews: [
+      { author: 'David L.', rating: 5, comment: 'The combination of nutty brown butter, rich dark chocolate, and the smoked salt is absolute genius.', date: 'July 11, 2026' }
+    ],
+    color: '#5d4037',
+    visualType: 'cookie'
+  },
+  {
+    id: 'croissant-1',
+    name: 'The Golden Lamination',
+    category: 'Croissants',
+    price: 8.00,
+    rating: 5.0,
+    badge: 'Signature',
+    availability: 'In Stock',
+    description: 'Classic French croissant made with AOP Charentes-Poitou butter, offering 81 distinct layers of crispy perfection.',
+    details: 'Golden brown, highly aerated honeycomb crumb structure, carrying a rich lactic butter aroma and a shell that shatters beautifully upon contact.',
+    ingredients: 'AOP French Butter, Organic Wheat Flour, Sea Salt, Active Yeast, Cane Sugar.',
+    reviews: [
+      { author: 'Jean-Pierre', rating: 5, comment: 'Better than the croissants I had in Paris last spring. Flaky, buttery, absolute perfection.', date: 'June 18, 2026' }
+    ],
+    color: '#e0a96d',
+    visualType: 'croissant'
+  },
+  {
+    id: 'bread-1',
+    name: 'Sourdough Ancestral',
+    category: 'Bread',
+    price: 12.00,
+    rating: 4.8,
+    badge: 'Freshly Baked',
+    availability: 'In Stock',
+    description: 'Wild-yeast sourdough loaf baked in a stone deck oven with a thick caramelized blistered crust.',
+    details: 'Crafted with our 50-year-old heirloom starter and stone-ground heritage flour, fermented for 36 hours for an open custard crumb and pleasant sour note.',
+    ingredients: 'Heritage Whole Wheat Flour, Filtered Spring Water, Ancestral Sourdough Starter, Celtic Sea Salt.',
+    reviews: [],
+    color: '#8d6e63',
+    visualType: 'bread'
+  },
+  {
+    id: 'pastry-1',
+    name: 'Cardamom Knot Royale',
+    category: 'Pastries',
+    price: 7.50,
+    rating: 4.9,
+    badge: 'Best Seller',
+    availability: 'In Stock',
+    description: 'Swedish-style twisted bun with freshly ground cardamom seeds, brown sugar glaze, and pearl sugar dusting.',
+    details: 'Rich, cardamom-infused yeast dough twisted into a crown, brushed with organic maple syrup wash immediately after baking.',
+    ingredients: 'Green Cardamom Pods, Unbleached Wheat Flour, Brown Sugar, Organic Maple Syrup, Pearl Sugar.',
+    reviews: [],
+    color: '#bcaaa4',
+    visualType: 'pastry'
+  },
+  {
+    id: 'pie-1',
+    name: 'Heirloom Apple Amber',
+    category: 'Pies',
+    price: 45.00,
+    rating: 4.7,
+    badge: 'Seasonal',
+    availability: 'In Stock',
+    description: 'Deep-dish pie featuring spiced heritage apples baked inside a lard-leaf lard flaky crust, drizzled with salted butter caramel.',
+    details: 'A mix of Honeycrisp and Braeburn apples roasted with Ceylon cinnamon and nutmeg, topped with a gorgeous woven lattice crust.',
+    ingredients: 'Heritage Apples, Lard and Butter Flaky Pastry, Ceylon Cinnamon, Nutmeg, Salted Caramel.',
+    reviews: [],
+    color: '#d7ccc8',
+    visualType: 'pie'
+  },
+  {
+    id: 'tart-1',
+    name: 'Lemon Meringue Sun',
+    category: 'Tarts',
+    price: 14.00,
+    rating: 4.9,
+    badge: 'Signature',
+    availability: 'In Stock',
+    description: 'Crisp sweet pastry crust filled with tangy Meyer lemon curd, crowned with torched French meringue peaks.',
+    details: 'A butter shortcrust shell filled with citrus curd made from organic Meyer lemons, topped with high, silky meringue caramelized with a hand torch.',
+    ingredients: 'Meyer Lemons, Pastry Shortcrust, Egg Whites, Sugar, Grass-fed Butter.',
+    reviews: [
+      { author: 'Olivia M.', rating: 5, comment: 'The tartness of the lemons balances out the sweet meringue perfectly. The crust holds together beautifully.', date: 'July 09, 2026' }
+    ],
+    color: '#ffe082',
+    visualType: 'tart'
+  },
+  {
+    id: 'macaron-1',
+    name: 'Céleste Macaron Box',
+    category: 'Macarons',
+    price: 36.00,
+    rating: 4.8,
+    badge: 'Gift Box',
+    availability: 'In Stock',
+    description: 'An elegant selection of 12 hand-painted French macarons in lavender, rose, vanilla, and salted caramel.',
+    details: 'Delicate, chewy almond flour shells with neat feet, filled with custom chocolate ganache and fruit curds, individually detailed with edible paint.',
+    ingredients: 'Almond Flour, Egg Whites, Organic Sugar, White Chocolate Ganache, Salted Butter Caramel, Fruit Curds.',
+    reviews: [],
+    color: '#e1bee7',
+    visualType: 'macarons'
+  },
+  {
+    id: 'cheesecake-1',
+    name: 'Basque Burnt Amber',
+    category: 'Cheesecakes',
+    price: 52.00,
+    rating: 5.0,
+    badge: 'Premium',
+    availability: 'Limited',
+    description: 'Crustless cheesecake baked at high heat to achieve a deeply caramelized top and a luscious, molten custard center.',
+    details: 'Made with French cream cheese and heavy farm cream, baked until the top is nearly black and the center retains a luxurious wobble.',
+    ingredients: 'French Cream Cheese, Farm Heavy Cream, Organic Eggs, Sugar, Vanilla Bean Caviar.',
+    reviews: [
+      { author: 'Nathalie R.', rating: 5, comment: 'It literally melts on your tongue. The caramelized bitter top offsets the creamy sweet interior. Pure genius.', date: 'July 14, 2026' }
+    ],
+    color: '#8d6e63',
+    visualType: 'cheesecake'
+  },
+  {
+    id: 'bday-2',
+    name: 'Vanilla Orchid Lace',
+    category: 'Birthday Cakes',
+    price: 90.00,
+    rating: 4.8,
+    badge: 'Elegant',
+    availability: 'In Stock',
+    description: 'Light vanilla sponge layered with Tahitian vanilla bean custard and iced in textured ivory buttercream.',
+    details: 'Adorned with handmade sugar lace and pressed edible pansy flowers, carrying a pure aromatic profile of premium vanilla beans.',
+    ingredients: 'Tahitian Vanilla Beans, Sponge Cake, Swiss Meringue Buttercream, Edible Flowers, Sugar Lace.',
+    reviews: [],
+    color: '#fffde7',
+    visualType: 'layered-cake'
+  },
+  {
+    id: 'wedding-2',
+    name: 'Eucalyptus Whisper',
+    category: 'Wedding Cakes',
+    price: 410.00,
+    rating: 4.9,
+    badge: 'Artisanal',
+    availability: 'Limited',
+    description: 'Naked four-tiered lemon lavender wedding cake adorned with fresh eucalyptus branches and wild flowers.',
+    details: 'A rustic yet elegant profile. Lemon sponge soaked in lavender syrup, filled with elderflower cream cheese frosting.',
+    ingredients: 'Lavender-infused Syrup, Lemon Zest, Elderflower Liqueur, Cream Cheese, Wild Flowers.',
+    reviews: [],
+    color: '#f3e5f5',
+    visualType: 'wedding-cake'
+  },
+  {
+    id: 'croissant-2',
+    name: 'Noir Pain au Chocolat',
+    category: 'Croissants',
+    price: 8.50,
+    rating: 4.9,
+    badge: 'Signature',
+    availability: 'In Stock',
+    description: 'Double-laminated chocolate pain au chocolat filled with two rods of Valrhona 70% dark chocolate.',
+    details: 'Dusted with dark cocoa powder and baked with dark cocoa-laminated dough, yielding beautiful contrasting stripes on its flaky dome.',
+    ingredients: 'AOP French Butter, Valrhona Chocolate Batons, Cocoa Powder, Organic Flour.',
+    reviews: [],
+    color: '#3e2723',
+    visualType: 'croissant'
+  }
+];
