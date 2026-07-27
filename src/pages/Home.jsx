@@ -190,7 +190,7 @@ export const Home = () => {
         <div 
           className="story-room-container" 
           style={{ 
-            backgroundColor: getInterpolatedBg(),
+            backgroundColor: scenes[activeScene]?.bg || 'var(--bg-scene-1)',
             color: activeScene === 3 ? 'var(--color-ivory)' : 'var(--color-cocoa)'
           }}
         >
@@ -198,7 +198,7 @@ export const Home = () => {
 
           <div className="story-room-inner">
             {/* Copy Column */}
-            <div className="story-room-copy">
+            <div key={activeScene} className="story-room-copy fade-in-slide-up">
               <p className="story-room-eyebrow" style={{ color: activeScene === 3 ? 'var(--color-butter)' : 'var(--color-terracotta)' }}>
                 {scenes[activeScene].eyebrow}
               </p>
