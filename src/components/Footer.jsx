@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 import { ArrowRight } from 'lucide-react';
+import { Logo } from './Logo';
 import '../styles/components/footer.css';
 
 export const Footer = () => {
@@ -22,7 +23,10 @@ export const Footer = () => {
         <div className="footer-container">
           {/* Brand Col */}
           <div className="footer-brand-column">
-            <h3>Butter & Whisk</h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+              <Logo size={32} color="var(--color-butter)" />
+              <h3 style={{ margin: 0, color: 'var(--color-ivory)', fontFamily: 'var(--font-display)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Butter & Whisk</h3>
+            </div>
             <p>
               A storytelling baking experience, crafting luxury wedding cakes, artisanal croissants, 
               and hearth sourdoughs for the modern epicurean.

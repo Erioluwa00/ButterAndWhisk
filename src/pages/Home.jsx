@@ -14,8 +14,17 @@ export const Home = () => {
   const { navigateTo, addToCart } = useContext(AppContext);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeReview, setActiveReview] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef(null);
   const triggerRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
+
+  // Detect mobile viewports
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // GSAP Entrance Animations for Room 1
   useEffect(() => {
@@ -222,15 +231,16 @@ export const Home = () => {
                 const scale = Math.max(0.7, 1 - Math.abs(diff) * 0.3);
                 const spinDirection = idx % 2 === 0 ? -1 : 1;
                 const rotate = diff * 45 * spinDirection; // Softer comfort rotation
-                const translateY = diff * -160; // Parallax vertical separation
+                const imageSize = isMobile ? 240 : 520;
+                const translateY = diff * (isMobile ? -30 : -160); // Parallax vertical separation
                 
                 return (
                   <div 
                     key={idx}
                     style={{ 
                       position: 'absolute',
-                      width: 520,
-                      height: 520,
+                      width: imageSize,
+                      height: imageSize,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -242,7 +252,7 @@ export const Home = () => {
                     <div className="story-room-image-float" style={{ width: '100%', height: '100%' }}>
                       <ProductVisualizer 
                         type={scene.visualType} 
-                        size={520} 
+                        size={imageSize} 
                         isStoryRoom={true}
                       />
                     </div>
@@ -503,19 +513,25 @@ export const Home = () => {
 
           <div className="bakers-grid">
             <div className="baker-card">
-              <div className="baker-avatar">👨‍🍳</div>
+              <div className="baker-avatar">
+                <img src="/baker_louis.png" alt="Chef Louis Laurent" />
+              </div>
               <h3>Chef Louis Laurent</h3>
               <p style={{ fontSize: 'var(--fs-xs)', textTransform: 'uppercase', color: 'var(--color-terracotta)', fontWeight: 'bold' }}>Head of Pastry</p>
               <p style={{ fontSize: 'var(--fs-sm)', marginTop: '8px' }}>Trained in Paris under Michelin-starred masters. Expert in croissant laminations.</p>
             </div>
             <div className="baker-card">
-              <div className="baker-avatar">🧔</div>
+              <div className="baker-avatar">
+                <img src="/baker_silas.png" alt="Silas Thorne" />
+              </div>
               <h3>Silas Thorne</h3>
               <p style={{ fontSize: 'var(--fs-xs)', textTransform: 'uppercase', color: 'var(--color-terracotta)', fontWeight: 'bold' }}>Head Baker</p>
               <p style={{ fontSize: 'var(--fs-sm)', marginTop: '8px' }}>Arthur’s primary caretaker. Silas has managed sourdough ferments for 20 years.</p>
             </div>
             <div className="baker-card">
-              <div className="baker-avatar">👩‍🍳</div>
+              <div className="baker-avatar">
+                <img src="/baker_amara.png" alt="Amara Vance" />
+              </div>
               <h3>Amara Vance</h3>
               <p style={{ fontSize: 'var(--fs-xs)', textTransform: 'uppercase', color: 'var(--color-terracotta)', fontWeight: 'bold' }}>Creative Cake Designer</p>
               <p style={{ fontSize: 'var(--fs-sm)', marginTop: '8px' }}>Sculpts sugar gum roses that fool botanical gardens. Expert in edible gilding.</p>

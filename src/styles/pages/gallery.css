@@ -95,6 +95,7 @@
   font-family: var(--font-display);
   font-size: var(--fs-xl);
   margin-bottom: 4px;
+  color: #ffffff !important;
 }
 
 .gallery-card-category {

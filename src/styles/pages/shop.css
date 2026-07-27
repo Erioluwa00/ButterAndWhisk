@@ -182,3 +182,59 @@
   font-size: var(--fs-5xl);
   margin-bottom: var(--space-md);
 }
+
+/* Responsive adjustments for shop titles to prevent overflow on mobile */
+@media (max-width: 768px) {
+  .shop-title {
+    font-size: clamp(1.8rem, 8vw, 2.25rem) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .shop-title {
+    font-size: clamp(1.4rem, 7.5vw, 1.75rem) !important;
+  }
+}
+
+/* Pagination Styling */
+.shop-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-xl);
+}
+
+.pagination-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background-color: transparent;
+  color: var(--color-cocoa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: var(--color-cocoa);
+  color: var(--color-ivory);
+  border-color: var(--color-cocoa);
+}
+
+.pagination-btn.active {
+  background-color: var(--color-cocoa);
+  color: var(--color-ivory);
+  border-color: var(--color-cocoa);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}

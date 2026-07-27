@@ -11,10 +11,13 @@ export const Shop = () => {
   const [maxPrice, setMaxPrice] = useState(350);
   const [sortBy, setSortBy] = useState('featured');
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   // Trigger brief skeletons when filters change for luxury feedback
   useEffect(() => {
     setLoading(true);
+    setCurrentPage(1);
     const timer = setTimeout(() => setLoading(false), 400);
     return () => clearTimeout(timer);
   }, [searchQuery, selectedCategory, maxPrice, sortBy]);
@@ -63,6 +66,14 @@ export const Shop = () => {
     if (cat === 'All') return products.length;
     return products.filter(p => p.category === cat).length;
   };
+
+  const totalPages = Math.ceil(sortedProducts.length / itemsPerPage);
+  const paginatedProducts = sortedProducts.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+  const startItem = sortedProducts.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1;
+  const endItem = Math.min(currentPage * itemsPerPage, sortedProducts.length);
 
   return (
     <div className="shop-page container page-transition-wrapper">
@@ -140,7 +151,7 @@ export const Shop = () => {
           {/* Toolbar */}
           <div className="shop-toolbar">
             <div>
-              Showing {sortedProducts.length} results of {products.length} pastries
+              Showing {startItem}–{endItem} of {sortedProducts.length} results
             </div>
             
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }} className="navbar-menu">
@@ -161,12 +172,48 @@ export const Shop = () => {
           {/* Grid & Fallback */}
           {loading ? (
             <Skeleton type="product" count={6} />
-          ) : sortedProducts.length > 0 ? (
-            <div className="shop-grid">
-              {sortedProducts.map(product => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+          ) : paginatedProducts.length > 0 ? (
+            <>
+              <div className="shop-grid">
+                {paginatedProducts.map(product => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+
+              {/* Pagination Controls */}
+              {totalPages > 1 && (
+                <div className="shop-pagination">
+                  <button 
+                    className="pagination-btn"
+                    onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                    disabled={currentPage === 1}
+                    aria-label="Previous page"
+                  >
+                    &larr;
+                  </button>
+                  
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                    <button
+                      key={page}
+                      className={`pagination-btn ${currentPage === page ? 'active' : ''}`}
+                      onClick={() => setCurrentPage(page)}
+                      aria-label={`Go to page ${page}`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                  
+                  <button 
+                    className="pagination-btn"
+                    onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                    disabled={currentPage === totalPages}
+                    aria-label="Next page"
+                  >
+                    &rarr;
+                  </button>
+                </div>
+              )}
+            </>
           ) : (
             <div className="shop-no-results">
               <div className="shop-no-results-icon">🥐🚫</div>
