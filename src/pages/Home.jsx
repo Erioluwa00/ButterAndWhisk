@@ -28,19 +28,19 @@ export const Home = () => {
 
   // GSAP Entrance Animations for Room 1
   useEffect(() => {
-    gsap.fromTo('.story-room-eyebrow', 
+    gsap.fromTo('.story-room-eyebrow',
       { opacity: 0, y: -20 },
       { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
     );
-    gsap.fromTo('.story-room-title', 
+    gsap.fromTo('.story-room-title',
       { opacity: 0, y: 40 },
       { opacity: 1, y: 0, duration: 1.2, delay: 0.2, ease: 'power3.out' }
     );
-    gsap.fromTo('.story-room-desc', 
+    gsap.fromTo('.story-room-desc',
       { opacity: 0, y: 30 },
       { opacity: 1, y: 0, duration: 1.2, delay: 0.4, ease: 'power3.out' }
     );
-    gsap.fromTo('.story-room-visual-wrap', 
+    gsap.fromTo('.story-room-visual-wrap',
       { opacity: 0, scale: 0.8 },
       { opacity: 1, scale: 1, duration: 1.5, delay: 0.4, ease: 'back.out(1.2)' }
     );
@@ -114,24 +114,24 @@ export const Home = () => {
     const handleScroll = () => {
       const container = containerRef.current;
       if (!container) return;
-      
+
       const rect = container.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      
+
       const storyTop = rect.top + window.scrollY;
       const scrollPosition = window.scrollY - storyTop;
       const totalScrollHeight = rect.height - windowHeight;
-      
+
       if (totalScrollHeight <= 0) return;
-      
+
       const scrollPercent = Math.max(0, Math.min(1, scrollPosition / totalScrollHeight));
       const progress = scrollPercent * 4;
       setScrollProgress(progress);
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -141,15 +141,15 @@ export const Home = () => {
     const r1 = parseInt(color1.substring(1, 3), 16);
     const g1 = parseInt(color1.substring(3, 5), 16);
     const b1 = parseInt(color1.substring(5, 7), 16);
-    
+
     const r2 = parseInt(color2.substring(1, 3), 16);
     const g2 = parseInt(color2.substring(3, 5), 16);
     const b2 = parseInt(color2.substring(5, 7), 16);
-    
+
     const r = Math.round(r1 + factor * (r2 - r1));
     const g = Math.round(g1 + factor * (g2 - g1));
     const b = Math.round(b1 + factor * (b2 - b1));
-    
+
     return `rgb(${r}, ${g}, ${b})`;
   };
 
@@ -157,7 +157,7 @@ export const Home = () => {
     const hexColors = ['#FAF7F2', '#FFF0F2', '#E8D78B', '#4E342E', '#E2ECDE'];
     const idx = Math.floor(scrollProgress);
     const factor = scrollProgress - idx;
-    
+
     if (idx >= 4) return hexColors[4];
     return interpolateColor(hexColors[idx], hexColors[idx + 1], factor);
   };
@@ -186,10 +186,10 @@ export const Home = () => {
   return (
     <div className="home-page page-transition-wrapper">
       {/* Storytelling Pinned Room (Scene 1 to 5) */}
-      <div ref={containerRef} style={{ position: 'relative', height: '630vh', marginTop: 'calc(-1 * var(--header-height))' }}>
-        <div 
-          className="story-room-container" 
-          style={{ 
+      <div ref={containerRef} style={{ position: 'relative', height: '320vh', marginTop: 'calc(-1 * var(--header-height))' }}>
+        <div
+          className="story-room-container"
+          style={{
             backgroundColor: scenes[activeScene]?.bg || 'var(--bg-scene-1)',
             color: activeScene === 3 ? 'var(--color-ivory)' : 'var(--color-cocoa)'
           }}
@@ -208,9 +208,9 @@ export const Home = () => {
               <p className="story-room-desc">
                 {scenes[activeScene].desc}
               </p>
-              <button 
-                className="btn btn-primary" 
-                style={{ 
+              <button
+                className="btn btn-primary"
+                style={{
                   backgroundColor: activeScene === 3 ? 'var(--color-butter)' : 'var(--color-cocoa)',
                   color: activeScene === 3 ? 'var(--color-cocoa)' : 'var(--color-ivory)',
                   borderColor: activeScene === 3 ? 'var(--color-butter)' : 'var(--color-cocoa)'
@@ -224,35 +224,32 @@ export const Home = () => {
             {/* Visualizer Column */}
             <div className="story-room-visual-wrap" style={{ position: 'relative' }}>
               {scenes.map((scene, idx) => {
-                const diff = scrollProgress - idx;
-                if (Math.abs(diff) > 1.2) return null;
-                
-                const opacity = Math.max(0, 1 - Math.abs(diff));
-                const scale = Math.max(0.7, 1 - Math.abs(diff) * 0.3);
-                const spinDirection = idx % 2 === 0 ? -1 : 1;
-                const rotate = diff * 45 * spinDirection; // Softer comfort rotation
+                const isActive = activeScene === idx;
                 const imageSize = isMobile ? 240 : 520;
-                const translateY = diff * (isMobile ? -30 : -160); // Parallax vertical separation
-                
+                const spinDirection = idx % 2 === 0 ? -1 : 1;
+
                 return (
-                  <div 
+                  <div
                     key={idx}
-                    style={{ 
+                    style={{
                       position: 'absolute',
                       width: imageSize,
                       height: imageSize,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      opacity: opacity,
-                      transform: `translateY(${translateY}px) scale(${scale}) rotate(${rotate}deg)`,
-                      pointerEvents: opacity > 0.5 ? 'auto' : 'none'
+                      opacity: isActive ? 1 : 0,
+                      transform: isActive
+                        ? 'scale(1) rotate(0deg)'
+                        : `scale(0.7) rotate(${spinDirection * 45}deg)`,
+                      transition: 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+                      pointerEvents: isActive ? 'auto' : 'none'
                     }}
                   >
                     <div className="story-room-image-float" style={{ width: '100%', height: '100%' }}>
-                      <ProductVisualizer 
-                        type={scene.visualType} 
-                        size={imageSize} 
+                      <ProductVisualizer
+                        type={scene.visualType}
+                        size={imageSize}
                         isStoryRoom={true}
                       />
                     </div>
@@ -264,56 +261,56 @@ export const Home = () => {
 
           {/* Floaters decoration */}
           <div className="story-room-floaters">
-            <img 
-              src={scenes[activeScene].floaters[0]} 
-              alt="floater" 
-              style={{ 
-                position: 'absolute', 
-                top: '10%', 
-                left: '80%', 
-                width: '60px', 
-                height: '60px', 
-                objectFit: 'cover', 
-                borderRadius: '50%', 
+            <img
+              src={scenes[activeScene].floaters[0]}
+              alt="floater"
+              style={{
+                position: 'absolute',
+                top: '10%',
+                left: '80%',
+                width: '60px',
+                height: '60px',
+                objectFit: 'cover',
+                borderRadius: '50%',
                 boxShadow: 'var(--shadow-md)',
                 border: '2px solid var(--color-ivory)',
                 transform: `translateY(${activeScene * -15}px) rotate(${activeScene * 12}deg)`,
-                transition: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)' 
-              }} 
+                transition: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)'
+              }}
             />
-            <img 
-              src={scenes[activeScene].floaters[1]} 
-              alt="floater" 
-              style={{ 
-                position: 'absolute', 
-                top: '60%', 
-                left: '5%', 
-                width: '70px', 
-                height: '70px', 
-                objectFit: 'cover', 
-                borderRadius: '50%', 
+            <img
+              src={scenes[activeScene].floaters[1]}
+              alt="floater"
+              style={{
+                position: 'absolute',
+                top: '60%',
+                left: '5%',
+                width: '70px',
+                height: '70px',
+                objectFit: 'cover',
+                borderRadius: '50%',
                 boxShadow: 'var(--shadow-md)',
                 border: '2px solid var(--color-ivory)',
                 transform: `translateY(${activeScene * 20}px) rotate(${activeScene * -18}deg)`,
-                transition: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)' 
-              }} 
+                transition: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)'
+              }}
             />
-            <img 
-              src={scenes[activeScene].floaters[2]} 
-              alt="floater" 
-              style={{ 
-                position: 'absolute', 
-                top: '80%', 
-                left: '75%', 
-                width: '50px', 
-                height: '50px', 
-                objectFit: 'cover', 
-                borderRadius: '50%', 
+            <img
+              src={scenes[activeScene].floaters[2]}
+              alt="floater"
+              style={{
+                position: 'absolute',
+                top: '80%',
+                left: '75%',
+                width: '50px',
+                height: '50px',
+                objectFit: 'cover',
+                borderRadius: '50%',
                 boxShadow: 'var(--shadow-md)',
                 border: '2px solid var(--color-ivory)',
                 transform: `translateY(${activeScene * -8}px) rotate(${activeScene * 6}deg)`,
-                transition: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)' 
-              }} 
+                transition: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)'
+              }}
             />
           </div>
 
@@ -338,9 +335,9 @@ export const Home = () => {
           {/* Indicators */}
           <div className="story-room-markers">
             {scenes.map((_, idx) => (
-              <span 
-                key={idx} 
-                className={activeScene === idx ? 'active' : ''} 
+              <span
+                key={idx}
+                className={activeScene === idx ? 'active' : ''}
                 onClick={() => {
                   triggerRefs[idx].current?.scrollIntoView({ behavior: 'smooth' });
                 }}
@@ -348,7 +345,7 @@ export const Home = () => {
               />
             ))}
           </div>
-          
+
           <DrippingIcing color="var(--bg-primary)" position="bottom" />
         </div>
 
@@ -416,7 +413,7 @@ export const Home = () => {
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
-          
+
           <div style={{ textAlign: 'center', marginTop: 'var(--space-2xl)' }}>
             <button className="btn btn-primary" onClick={() => navigateTo('shop')}>
               View Full Menu <ArrowRight size={14} />
@@ -435,11 +432,11 @@ export const Home = () => {
                 Bespoke Luxury Cakes
               </h2>
               <p style={{ color: 'rgba(250, 247, 242, 0.7)', fontSize: 'var(--fs-md)', lineHeight: 1.7 }}>
-                Collaborate with our head designers to sculpt the perfect centerpiece for your wedding, 
+                Collaborate with our head designers to sculpt the perfect centerpiece for your wedding,
                 gala, or private milestone. We offer full consultations, tastings, and on-site assembly.
               </p>
-              <button 
-                className="btn btn-accent" 
+              <button
+                className="btn btn-accent"
                 style={{ marginTop: 'var(--space-md)' }}
                 onClick={() => navigateTo('contact')}
               >
@@ -448,13 +445,13 @@ export const Home = () => {
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <div 
+              <div
                 className="bespoke-arch-frame"
-                style={{ 
-                  width: '280px', 
-                  height: '340px', 
-                  borderRadius: '140px 140px 24px 24px', 
-                  overflow: 'hidden', 
+                style={{
+                  width: '280px',
+                  height: '340px',
+                  borderRadius: '140px 140px 24px 24px',
+                  overflow: 'hidden',
                   border: '2px solid rgba(232, 215, 139, 0.3)',
                   boxShadow: '0 20px 45px rgba(0, 0, 0, 0.45)',
                   backgroundColor: 'rgba(78, 52, 46, 0.5)',
@@ -550,7 +547,7 @@ export const Home = () => {
 
           <div style={{ position: 'relative', minHeight: '220px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 40px' }}>
             {/* Left Prev Button */}
-            <button 
+            <button
               onClick={() => setActiveReview(prev => (prev === 0 ? reviews.length - 1 : prev - 1))}
               style={{
                 position: 'absolute',
@@ -572,7 +569,7 @@ export const Home = () => {
             {/* Review Card Layout */}
             <div style={{ width: '100%', textAlign: 'center' }}>
               {reviews.map((rev, idx) => (
-                <div 
+                <div
                   key={idx}
                   style={{
                     display: activeReview === idx ? 'block' : 'none',
@@ -593,7 +590,7 @@ export const Home = () => {
             </div>
 
             {/* Right Next Button */}
-            <button 
+            <button
               onClick={() => setActiveReview(prev => (prev === reviews.length - 1 ? 0 : prev + 1))}
               style={{
                 position: 'absolute',
@@ -616,7 +613,7 @@ export const Home = () => {
           {/* Slider Dots */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginTop: '28px' }}>
             {reviews.map((_, idx) => (
-              <button 
+              <button
                 key={idx}
                 onClick={() => setActiveReview(idx)}
                 style={{
@@ -667,11 +664,11 @@ export const Home = () => {
 
       {/* 11. Newsletter Card */}
       <section className="container" style={{ padding: 'var(--space-3xl) 0' }}>
-        <div 
-          style={{ 
-            backgroundColor: 'var(--color-butter)', 
-            padding: 'var(--space-3xl) var(--space-md)', 
-            borderRadius: 'var(--radius-lg)', 
+        <div
+          style={{
+            backgroundColor: 'var(--color-butter)',
+            padding: 'var(--space-3xl) var(--space-md)',
+            borderRadius: 'var(--radius-lg)',
             textAlign: 'center',
             display: 'flex',
             flexDirection: 'column',
@@ -685,9 +682,9 @@ export const Home = () => {
             Unlock exclusive pastry collections, holiday pre-ordering windows, and private tasting invitations.
           </p>
           <div style={{ display: 'flex', gap: 8, marginTop: 12, width: '100%', maxWidth: 400 }}>
-            <input 
-              type="email" 
-              placeholder="Your email address" 
+            <input
+              type="email"
+              placeholder="Your email address"
               style={{ padding: '12px 20px', borderRadius: 'var(--radius-pill)', border: '1px solid var(--border-color)', backgroundColor: 'var(--color-ivory)', width: '100%', outline: 'none' }}
             />
             <button className="btn btn-primary" onClick={() => navigateTo('shop')}>Subscribe</button>
